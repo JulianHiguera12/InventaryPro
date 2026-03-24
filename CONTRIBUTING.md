@@ -4,38 +4,35 @@ Gracias por tu interés en contribuir a **InventoryPro**. Aquí hay algunas paut
 
 ## Cómo Contribuir
 
-1. **Haz un Fork del Repositorio**  
-   Haz clic en el botón "Fork" en la parte superior derecha de la página del repositorio para crear tu propia copia del proyecto.
-
-2. **Clona tu Fork**  
-   Clona tu fork en tu máquina local:
+1. **Clona el Repositorio**  
+   Clona el repositorio principal en tu máquina local:
    ```bash
-   git clone https://github.com/TU_USUARIO/InventoryPro.git
+   git clone https://github.com/ORGANIZACION/InventoryPro.git
    ```
 
-3. **Crea una Nueva Rama**  
+2. **Crea una Nueva Rama**  
    Siempre crea una nueva rama para tus cambios:
    ```bash
    git checkout -b nombre-de-tu-rama
    ```
 
-4. **Realiza los Cambios**  
+3. **Realiza los Cambios**  
    Haz los cambios que desees en el código.
 
-5. **Commitea tus Cambios**  
+4. **Commitea tus Cambios**  
    Asegúrate de que tus commits sean claros y concisos:
    ```bash
    git commit -m "Descripción de los cambios"
    ```
 
-6. **Sube tus Cambios**  
-   Sube tus cambios a tu fork:
+5. **Sube tus Cambios**  
+   Sube tus cambios a la rama correspondiente en el repositorio principal:
    ```bash
    git push origin nombre-de-tu-rama
    ```
 
-7. **Crea un Pull Request**  
-   Ve a la página del repositorio original y haz clic en "New Pull Request". Describe tus cambios y crea el PR.
+6. **Crea un Pull Request**  
+   Ve a la página del repositorio y haz clic en "New Pull Request". Selecciona tu rama y describe tus cambios para crear el PR.
 
 ## Código de Conducta
 

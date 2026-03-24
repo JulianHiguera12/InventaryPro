@@ -513,38 +513,42 @@ btnSearch.addEventListener('click', () => openModal(modalSearch));
 
 inputSearch.addEventListener('input', () => {
     const termino = inputSearch.value.trim().toLowerCase();
+    const tbody = document.getElementById('prod-search-results');
+
+    if (!termino) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;font-style:italic;color:#888;">Ingrese un término de búsqueda</td></tr>`;
+        return;
+    }
+
     const resultados = productosCache.filter(p =>
         p.codigo?.toLowerCase().includes(termino) ||
         p.nombre?.toLowerCase().includes(termino) ||
         p.proveedor?.toLowerCase().includes(termino)
     );
-    const tbody = document.getElementById('prod-search-results');
-    if (!termino) {
-        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;font-style:italic;color:#888;">Ingrese un término de búsqueda</td></tr>`;
-        return;
-    }
+
     if (resultados.length === 0) {
         tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#aaa;">No se encontraron productos.</td></tr>`;
         return;
     }
-tbody.innerHTML = resultados.map(p => {
-    const sv = getSemaforoVence(p.fechaVence);
-    const ss = getSemaforoStock(p.cantidad);
-    return `<tr>
-        <td>${p.codigo}</td>
-        <td>${p.nombre}</td>
-        <td>${p.proveedor}</td>
-        <td>${p.fechaVence} ${sv.icono}</td>
-        <td>${p.cantidad ?? '-'} ${ss.icono}</td>
-        <td>
-            <button class="btn-ver-prod" data-id="${p.id}">👁️</button>
-            ${sessionStorage.getItem('rol') !== 'auxiliar' ? `
-                <button class="btn-editar-prod" data-id="${p.id}">✏️</button>
-                <button class="btn-borrar-prod" data-id="${p.id}">🗑️</button>
-            ` : ''}
-        </td>
-    </tr>`;
-}).join('');
+
+    tbody.innerHTML = resultados.map(p => {
+        const sv = getSemaforoVence(p.fechaVence);
+        const ss = getSemaforoStock(p.cantidad);
+        return `<tr>
+            <td>${p.codigo}</td>
+            <td>${p.nombre}</td>
+            <td>${p.proveedor}</td>
+            <td>${p.fechaVence} ${sv.icono}</td>
+            <td>${p.cantidad ?? '-'} ${ss.icono}</td>
+            <td>
+                <button type="button" class="btn-ver-prod" data-id="${p.id}">👁️</button>
+                ${sessionStorage.getItem('rol') !== 'auxiliar' ? `
+                    <button type="button" class="btn-editar-prod" data-id="${p.id}">✏️</button>
+                    <button type="button" class="btn-borrar-prod" data-id="${p.id}">🗑️</button>
+                ` : ''}
+            </td>
+        </tr>`;
+    }).join('');
 
     tbody.querySelectorAll('.btn-ver-prod').forEach(btn =>
         btn.addEventListener('click', () => { closeModal(modalSearch); abrirVer(btn.dataset.id); }));
