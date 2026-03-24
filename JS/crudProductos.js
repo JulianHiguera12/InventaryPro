@@ -527,22 +527,25 @@ inputSearch.addEventListener('input', () => {
         tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#aaa;">No se encontraron productos.</td></tr>`;
         return;
     }
-    tbody.innerHTML = resultados.map(p => {
-        const sv = getSemaforoVence(p.fechaVence);
-        const ss = getSemaforoStock(p.cantidad);
-        return `<tr>
-            <td>${p.codigo}</td>
-            <td>${p.nombre}</td>
-            <td>${p.proveedor}</td>
-            <td>${p.fechaVence} ${sv.icono}</td>
-            <td>${p.cantidad ?? '-'} ${ss.icono}</td>
-            <td>
-                <button class="btn-ver-prod"    data-id="${p.id}">👁️</button>
+tbody.innerHTML = resultados.map(p => {
+    const sv = getSemaforoVence(p.fechaVence);
+    const ss = getSemaforoStock(p.cantidad);
+    return `<tr>
+        <td>${p.codigo}</td>
+        <td>${p.nombre}</td>
+        <td>${p.proveedor}</td>
+        <td>${p.fechaVence} ${sv.icono}</td>
+        <td>${p.cantidad ?? '-'} ${ss.icono}</td>
+        <td>
+            <button class="btn-ver-prod" data-id="${p.id}">👁️</button>
+            ${sessionStorage.getItem('rol') !== 'auxiliar' ? `
                 <button class="btn-editar-prod" data-id="${p.id}">✏️</button>
                 <button class="btn-borrar-prod" data-id="${p.id}">🗑️</button>
-            </td>
-        </tr>`;
-    }).join('');
+            ` : ''}
+        </td>
+    </tr>`;
+}).join('');
+
     tbody.querySelectorAll('.btn-ver-prod').forEach(btn =>
         btn.addEventListener('click', () => { closeModal(modalSearch); abrirVer(btn.dataset.id); }));
     tbody.querySelectorAll('.btn-editar-prod').forEach(btn =>

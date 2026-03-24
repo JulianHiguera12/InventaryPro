@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     };
-
+});
 // Llama a la función dentro de tu DOMContentLoaded
 gestionarDropdown();
 
